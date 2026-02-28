@@ -2,6 +2,10 @@ services:
   node:
     ports:
       - "127.0.0.1:3000:3000"
-    env_file:
-      - secrets.dev.env
+    environment:
+      - DB_HOST=localhost
+      - DB_PORT=3306
+      - DB_USER=api
+      - DB_PASSWORD=apidev
+      - DB_NAME=ajamiyat
     command: npm run dev
