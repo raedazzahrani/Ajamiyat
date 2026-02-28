@@ -1,0 +1,30 @@
+databaseType = "MySql"
+id = "fa92f4c9-a9bc-4d6c-9043-766177df2b2c"
+name = "ajamiyat"
+
+[flyway]
+callbackLocations = [ "filesystem:callbacks" ]
+locations = [ "filesystem:migrations" ]
+mixed = true
+outOfOrder = true
+schemaModelLocation = "schema-model"
+validateMigrationNaming = true
+
+[flywayDesktop]
+enableMigrations = true
+developmentEnvironment = "development"
+shadowEnvironment = "shadow"
+
+  [flywayDesktop.generate]
+  undoScripts = false
+
+[redgateCompare]
+filterFile = "filter.rgf"
+
+[redgateCompare.mysql.options.ignores]
+ignoreNewlinesInTextObjects = "off"
+
+[environments.ajamiyat]
+url = "jdbc:mysql://localhost:3306/ajamiyat?allowPublicKeyRetrieval=true&useSSL=false"
+schemas = [ "ajamiyat" ]
+displayName = "ajamiyat"

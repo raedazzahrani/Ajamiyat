@@ -4,4 +4,3 @@
 *.artifact
 report.html
 report.json
-flyway.toml
