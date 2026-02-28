@@ -21,7 +21,8 @@ async function fetch(submissionId){
     return rows;
   }
   catch (err) {
-    throw new Error(`Failed to fetch submissions: ${err}`);
+    console.error("Failed to fetch submissions");
+    throw err;
   }
 }
 
@@ -31,7 +32,8 @@ async function insert(entryData){
     return result;
   }
   catch (err){
-    throw new Error(`Failed to insert submission: ${err}`);
+    console.error("Failed to insert submission");
+    throw err;
   }
 }
 

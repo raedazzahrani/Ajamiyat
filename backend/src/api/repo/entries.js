@@ -12,7 +12,8 @@ async function fetchLatestApproved(entryId, offset, limit){
     return rows;
   }
   catch (err) {
-    throw new Error(`Failed to fetch entries: ${err}`);
+    console.error("Failed to fetch entries");
+    throw err;
   }
 }
 
@@ -27,7 +28,8 @@ async function fetch(entryId){
     return rows;
   }
   catch (err) {
-    throw new Error(`Failed to fetch entries: ${err}`);
+    console.error("Failed to fetch entry");
+    throw err;
   }
 }
 
@@ -42,7 +44,8 @@ async function updateID(oldEntryId, newEntryID){
     return result;
   }
   catch (err) {
-    throw new Error(`Failed to update entries: ${err}`);
+    console.error("Failed to update entry ID");
+    throw err;
   }
 }
 
