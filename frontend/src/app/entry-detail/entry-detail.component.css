@@ -1,0 +1,82 @@
+:host {
+  display: block;
+  direction: rtl;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #f8f9fb;
+  min-height: 100vh;
+}
+
+.entry-container {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.entry-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.meta {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+}
+
+.section h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #333;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.3rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 0.4rem 0;
+  line-height: 1.6;
+  color: #444;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.badge {
+  background-color: #eef2ff;
+  color: #3730a3;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  text-decoration: none;
+  background: #111827;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #374151;
+}

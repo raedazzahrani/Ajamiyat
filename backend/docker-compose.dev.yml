@@ -1,0 +1,7 @@
+services:
+  node:
+    ports:
+      - "3000:3000"
+    env_file:
+      - secrets.dev.env
+    command: npm run dev

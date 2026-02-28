@@ -1,0 +1,7 @@
+services:
+  node:
+    build: .
+    container_name: node
+    volumes:
+      - ./:/home/node/app
+      - /home/node/app/node_modules

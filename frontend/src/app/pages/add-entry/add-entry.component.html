@@ -1,0 +1,156 @@
+<div class="page-container">
+  <mat-card class="form-card">
+
+    <h2 class="title">رصد الألفاظ</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <section>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>الكلمة</mat-label>
+          <input matInput formControlName="entry_id" placeholder="مثال: {{exampleEntry.entry_id}}"/>
+        </mat-form-field>
+
+        <div formArrayName="forms" class="array-group">
+          <div *ngFor="let ctrl of formsArray.controls; let i = index"
+               class="array-row">
+
+            <mat-form-field appearance="outline" class="flex-field">
+              <mat-label>صيغة أخرى{{ 1 + i }}</mat-label>
+              <input matInput placeholder="{{exampleEntry.forms?.[i]? 'مثال: ' + exampleEntry.forms[i] : ''}}" [formControlName]="i" />
+            </mat-form-field>
+
+            <button mat-icon-button
+                    color="warn"
+                    type="button"
+                    (click)="removeForm(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <button mat-stroked-button
+                  type="button"
+                  (click)="addForm()">
+           ➕ زيادة الصيغ
+          </button>
+        </div>
+
+      </section>
+      <section>
+        <h3>تأصيل الكلمة</h3 >
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>اللغة التي دخلت منها الكلمة</mat-label>
+            <input matInput formControlName="origin" placeholder="مثال: {{exampleEntry.origin}}" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>الكلمة في لغتها <small>(إن عُرفت)</small></mat-label>
+          <input matInput formControlName="original" placeholder=" مثال: {{exampleEntry.original}}"/>
+        </mat-form-field>
+
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <section>
+        <h3>المعاني المقابلة للكلمة في العربية <small>(إن وُجدت)</small></h3>
+
+        <div formArrayName="meanings" class="array-group">
+          <div *ngFor="let ctrl of meaningsArray.controls; let i = index"
+               class="array-row">
+
+            <mat-form-field appearance="outline" class="flex-field">
+              <mat-label>معنى {{ 1 + i }}:</mat-label>
+              <input matInput placeholder="{{exampleEntry.meanings?.[i]? 'مثال: ' + exampleEntry.meanings?.[i] : ''}}" [formControlName]="i" />
+            </mat-form-field>
+
+            <button mat-icon-button
+                    color="warn"
+                    type="button"
+                    (click)="removeMeaning(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <button mat-stroked-button
+                  type="button"
+                  (click)="addMeaning()">
+           ➕ زيادة المعاني
+          </button>
+        </div>
+      </section>
+
+
+
+      <section>
+        <h3>أمثلة وسياقات وشواهد <small>(إن وُجدت)</small></h3>
+
+        <div formArrayName="examples" class="array-group">
+          <div *ngFor="let ctrl of examplesArray.controls; let i = index"
+               class="array-row">
+
+            <mat-form-field appearance="outline" class="flex-field">
+              <mat-label>سياق {{ 1 + i }}:</mat-label>
+              <input matInput placeholder="{{exampleEntry.examples?.[i]? 'مثال: ' + exampleEntry.examples?.[i] : ''}}" [formControlName]="i" />
+            </mat-form-field>
+
+            <button mat-icon-button
+                    color="warn"
+                    type="button"
+                    (click)="removeExample(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <button mat-stroked-button
+                  type="button"
+                  (click)="addExample()">
+           ➕ زيادة السياقات
+          </button>
+        </div>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <section>
+        <h3>الكتب والمراجع <small>(إن وُجدت)</small></h3>
+
+        <div formArrayName="references" class="array-group">
+          <div *ngFor="let ctrl of referencesArray.controls; let i = index"
+               class="array-row">
+
+            <mat-form-field appearance="outline" class="flex-field">
+              <mat-label>مرجع {{ 1 + i }}:</mat-label>
+              <input matInput placeholder="{{exampleEntry.sources?.[i]? 'مثال: ' + exampleEntry.sources?.[i] : ''}}" [formControlName]="i" />
+            </mat-form-field>
+
+            <button mat-icon-button
+                    color="warn"
+                    type="button"
+                    (click)="removeReference(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <button mat-stroked-button
+                  type="button"
+                  (click)="addReference()">
+           ➕ زبادة المراجع
+          </button>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button mat-flat-button
+                color="primary"
+                type="submit"
+                [disabled]="form.invalid">
+          رصد اللفظة
+        </button>
+      </div>
+
+    </form>
+  </mat-card>
+</div>

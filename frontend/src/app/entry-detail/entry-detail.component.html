@@ -1,0 +1,57 @@
+<div *ngIf="entry$ | async as entry" class="entry-container">
+
+  <div class="entry-title">{{ entry.entry_id }}</div>
+
+  <div class="meta">
+    من {{ entry.original }} من اللغة {{ entry.origin }}
+
+  </div>
+
+  <div class="section" *ngIf="entry.categories?.length">
+    <h4>التصنيفات</h4>
+    <div class="badges">
+      <span class="badge" *ngFor="let cat of entry.categories">
+        {{ cat }}
+      </span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h4>المعاني</h4>
+    <ul>
+      <li *ngFor="let meaning of entry.meanings">
+        {{ meaning }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h4>الصيغ</h4>
+    <ul>
+      <li *ngFor="let form of entry.forms">
+        {{ form }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="section" *ngIf="entry.examples?.length">
+    <h4>أمثلة</h4>
+    <ul>
+      <li *ngFor="let example of entry.examples">
+        {{ example }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="section" *ngIf="entry.sources?.length">
+    <h4>المصادر</h4>
+    <ul>
+      <li *ngFor="let source of entry.sources">
+        {{ source }}
+      </li>
+    </ul>
+  </div>
+
+  <a routerLink="/" class="back-btn">رجوع</a>
+
+</div>
