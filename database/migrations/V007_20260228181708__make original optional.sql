@@ -1,0 +1,1 @@
+ALTER TABLE entries MODIFY original VARCHAR(255);

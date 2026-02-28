@@ -1,0 +1,11 @@
+services:
+  mysql:
+    env_file:
+      - "secrets.prod.env"
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - mysql-prod:/var/lib/mysql
+
+    volumes:
+      mysql-prod:

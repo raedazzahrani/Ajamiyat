@@ -1,0 +1,11 @@
+services:
+  mysql:
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysqldev
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - mysql-dev:/var/lib/mysql
+
+volumes:
+  mysql-dev:
