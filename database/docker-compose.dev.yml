@@ -2,9 +2,13 @@ services:
   mysql:
     environment:
       - MYSQL_ROOT_PASSWORD=mysqldev
-    ports:
-      - "127.0.0.1:3306:3306"
+      - MYSQL_DATABASE=ajamiyat
+    # unless you bind to all interfaces 0.0.0.0, other containers wont be able to connect to mysql using host.docker.internal 
+    #  (it only workd on windows and mac, on linux you need to add extra_hosts: - "host.docker.internal:host-gateway" 
+    #  to the service), your other option is to use the service name as the host (mysql in this case) and bind to all interfaces, but that will expose mysql to the outside world which is not ideal for development
     volumes:
+    ports:
+      - "3306:3306" 
       - mysql-dev:/var/lib/mysql
 
 volumes:

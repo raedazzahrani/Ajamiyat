@@ -3,9 +3,11 @@ services:
     ports:
       - "127.0.0.1:3000:3000"
     environment:
-      - DB_HOST=localhost
+      - DB_HOST=host.docker.internal
       - DB_PORT=3306
       - DB_USER=api
       - DB_PASSWORD=apidev
       - DB_NAME=ajamiyat
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: npm run dev
