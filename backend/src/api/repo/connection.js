@@ -1,5 +1,5 @@
 const mysql = require("mysql2/promise");
-const api_db_version = "017.20260301121445"; // Update this version when making database schema changes
+const api_db_version = "018.20260301141950"; // Update this version when making database schema changes
 
 
 const pool = mysql.createPool({
