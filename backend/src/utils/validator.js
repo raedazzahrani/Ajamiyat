@@ -50,7 +50,7 @@ function validateRequiredStringArray(value, fieldName){
     if(value.length == 0)
         return `Field '${fieldName}' must contain at least one valid element`;
     for(let i = 0; i < value.length; i++){
-        error = validateRequiredString(value, i);
+        error = validateRequiredString(value[i], i);
         if(error) errors.push(`element '${value[i]}' at position ${error}`);
     }
     if (errors.length > 0) return errors;

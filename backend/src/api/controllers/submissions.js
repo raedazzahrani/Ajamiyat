@@ -114,8 +114,8 @@ async function add(req, res){
     //with different meaning, this is extremely rare and unlikely to ever happen
     //but if it does it will result in a painful bug, as two completly different entries
     //will be treated as one
-    if(entryData.entry_id === undefined) entryData.entry_id = entryData.forms[0];
-
+    if(entry_id === undefined) entry_id = forms[0];
+    const entryData = {entry_id, origin, original, categories, forms, sources, meanings, examples};
     try {
        const result = await submissionsRepo.insert(entryData);
        if(result.submission_id == null) throw new Error("An unknown database error has occured");
