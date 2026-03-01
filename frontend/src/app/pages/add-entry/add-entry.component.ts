@@ -12,7 +12,7 @@ import { EntryService } from 'src/app/services/entry.service';
 @Component({
   selector: 'add-entry-form',
   templateUrl: './add-entry.component.html',
-  styleUrls: ["./add-entry.component.scss"]
+  styleUrls: ["./add-entry.component.css"]
 })
 
 export class AddEntryComponent implements OnInit {
