@@ -7,9 +7,9 @@ services:
     #  (it only workd on windows and mac, on linux you need to add extra_hosts: - "host.docker.internal:host-gateway" 
     #  to the service), your other option is to use the service name as the host (mysql in this case) and bind to all interfaces, but that will expose mysql to the outside world which is not ideal for development
     volumes:
+      - mysql-dev:/var/lib/mysql
     ports:
       - "3306:3306" 
-      - mysql-dev:/var/lib/mysql
 
 volumes:
   mysql-dev:
