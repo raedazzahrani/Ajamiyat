@@ -90,7 +90,7 @@
   padding: 0.2rem;
 }
 
-.examples {
+.examples, .meanings{
   font-size: 0.85rem;
   color: #444;
   line-height: 1.4;

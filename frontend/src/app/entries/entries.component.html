@@ -30,6 +30,9 @@
           من اللغة: {{ entry.origin }}
           <span class="flag">{{ FLAGS[entry.origin] || '🏳️' }}</span>
         </p>
+        <p class="meanings" *ngIf="entry.meanings.length > 0 && entry.examples.length === 0">
+          يراد بها: {{ entry.meanings.join(' و') }}
+        </p> 
         <p class="examples" *ngIf="entry.examples.length > 0">
           مثال: {{ entry.examples[0] }}
         </p>

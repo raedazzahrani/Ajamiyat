@@ -45,9 +45,6 @@ h3 small {
 /* ===============================
    Sections & Fields
 ================================= */
-section {
-  margin: 36px 0;
-}
 
 hr {
   margin: 32px 0;
@@ -56,14 +53,15 @@ hr {
   opacity: 0.6;
 }
 
-.form-field {
+form section {
+  margin: 36px 0;
   display: flex;
   flex-direction: column;
   margin-bottom: 18px;
-
+  gap: 0.5rem;
 }
 
-input[type="text"]{
+input, select{
   height: 42px;
   padding: 0 14px;
   font-size: 16px;
@@ -71,16 +69,12 @@ input[type="text"]{
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   box-sizing: border-box;
+  border-radius: 12px;
 }
 
-.input[type=text]:focus {
+.input, select:focus {
   border-color: #90caf9;
   box-shadow: 0 0 0 2px rgba(144, 202, 249, 0.2);
-}
-
-
-.form-field input {
-  border-radius: 12px;
 }
 
 .input-group input {
@@ -94,22 +88,22 @@ input[type="text"]{
   flex: 1;
 }
 
-.form-field label {
-  margin-bottom: 6px;
+label {
   font-weight: 500;
   color: #37474f;
 }
 
-input.ng-invalid.ng-touched {
+.ng-invalid.ng-touched {
   border-color: #c62828;
 }
 
-.form-field:has(input.ng-invalid.ng-touched) label {
+section:has(.ng-invalid.ng-touched) label {
   color: #c62828;
 }
 
-.form-field:has(:required) label::after {
-  content: " *";
+section:has(:required) label::after {
+  content: " (مطلوب)";
+  font-size: 12px;
 }
 
 .full-width {
@@ -123,12 +117,6 @@ input.ng-invalid.ng-touched {
   display: flex;
   flex-direction: column;
   gap: 18px;
-}
-
-.array-row {
-  display: flex;
-  align-items: center;
-  gap: 0; /* we control spacing via input/button borders */
 }
 
 
@@ -169,14 +157,8 @@ input.ng-invalid.ng-touched {
   transform: translateY(-1px);
 }
 
-/* Submit button */
-.actions {
-  margin-top: 48px;
-  display: flex;
-  justify-content: flex-start; /* RTL friendly */
-}
-
 .submit-btn {
+  margin-top: 48px;
   min-width: 140px;
   height: 42px;
   font-weight: 600;
@@ -208,8 +190,4 @@ input.ng-invalid.ng-touched {
     padding: 28px 20px;
   }
 
-  .array-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
 }

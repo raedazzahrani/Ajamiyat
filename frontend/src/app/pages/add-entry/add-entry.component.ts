@@ -8,6 +8,8 @@ import {
 import { Observable, startWith, map } from 'rxjs';
 import { Entry } from 'src/app/models/entry.model';
 import { EntryService } from 'src/app/services/entry.service';
+import { noWhitespaceValidator } from 'src/utils/validation';
+
 
 @Component({
   selector: 'add-entry-form',
@@ -22,7 +24,10 @@ export class AddEntryComponent implements OnInit {
   
   
   // Predefined values
-  originOptions: string[] = ['Arabic', 'Latin', 'Greek', 'Persian'];
+  otherOriginOption = 'لغة أخرى';
+  originOptions: string[] = ['Arabic', 'Latin', 'Greek', 'Persian', 'Turkish', 'French', 'English'].concat(this.otherOriginOption);
+  
+
   referenceOptions: string[] = ['Quran', 'Hadith', 'Poetry', 'Dictionary of X'];
   
   filteredOrigins$!: Observable<string[]>;
@@ -51,30 +56,45 @@ export class AddEntryComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-    this.setupAutocomplete();
   }
 
   private buildForm(): void {
     this.form = this.fb.group({
-      entry_id: ['', Validators.required],
+      entry_id: this.createStringControl('', true),
       original: [''],
-      origin: ['', Validators.required],
-
+      originSelect: this.createStringControl('', true),
+      origin: this.createStringControl('', true),
       forms: this.fb.array([]),
       examples: this.fb.array([]),
       meanings: this.fb.array([]),
       references: this.fb.array([])
     });
+
+    this.form.get('originSelect')?.valueChanges.subscribe(value => {
+      if (value === this.otherOriginOption) {
+        this.form.get('origin')?.setValidators(this.createStringControl('', true).validator);
+      } else {
+        this.form.get('origin')?.clearValidators();
+      }
+
+      this.form.get('origin')?.updateValueAndValidity();
+    });
   }
 
   private createStringControl(value = '', required = false) {
+    let validators = [noWhitespaceValidator];
+    if (required) validators.push(Validators.required);
     return this.fb.control(
       value,
-      required ? Validators.required : []
+      validators
     );
   }
 
   // ---- FormArray Getters ----
+
+  get showOtherOriginInputField() {
+    return this.form.get('originSelect')?.value === this.otherOriginOption;
+  }
 
   get formsArray(): FormArray {
     return this.form.get('forms') as FormArray;
@@ -125,21 +145,7 @@ export class AddEntryComponent implements OnInit {
     this.meaningsArray.removeAt(index);
   }
 
-  // ---- Autocomplete ----
-
-  private setupAutocomplete(): void {
-    this.filteredOrigins$ = this.form.get('origin')!.valueChanges.pipe(
-      startWith(''),
-      map(value => this.filterOptions(value, this.originOptions))
-    );
-  }
-
-  private filterOptions(value: string, options: string[]): string[] {
-    const filterValue = value?.toLowerCase() || '';
-    return options.filter(option =>
-      option.toLowerCase().includes(filterValue)
-    );
-  }
+  
 
   submit(): void {
     if (this.form.invalid) return;
