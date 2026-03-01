@@ -23,6 +23,17 @@ async function approve(req, res){
     }
 }
 
+async function fetchAll(req, res){
+    try{
+        const submissions = await submissionsRepo.fetch(null, null, null);
+        return res.status(200).json(submissions);
+    }
+    catch(err){
+        console.error(err);
+        return res.status(500).json({error: "Internal server error"});
+    }
+}
+
 async function fetch(req, res){
     const submission_id = utils.parseStrictInt(req.params.submission_id);
     if (submission_id === null)
@@ -129,4 +140,4 @@ async function add(req, res){
 
 
 
-module.exports = {approve, fetch, remove, add};
+module.exports = {approve, fetch, remove, add, fetchAll};

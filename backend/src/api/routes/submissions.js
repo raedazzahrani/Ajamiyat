@@ -8,6 +8,7 @@ router.post('/', submissionsController.add);
 
 //require auth
 router.use(auth.checkAdmin);
+router.get('/', submissionsController.fetchAll);
 router.get('/:submission_id', submissionsController.fetch);
 router.post('/:submission_id/approve', submissionsController.approve);
 

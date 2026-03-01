@@ -37,4 +37,4 @@ async function insert(entryData){
   }
 }
 
-module.exports = {approve, fetchSubmissions: fetch, insert};
+module.exports = {approve, fetch, insert};
