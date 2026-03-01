@@ -30,8 +30,8 @@
           من اللغة: {{ entry.origin }}
           <span class="flag">{{ FLAGS[entry.origin] || '🏳️' }}</span>
         </p>
-        <p class="examples" *ngIf="entry.examples?.length">
-          مثال: {{ entry.examples?.[0] }}
+        <p class="examples" *ngIf="entry.examples.length > 0">
+          مثال: {{ entry.examples[0] }}
         </p>
       </div>
     </a>

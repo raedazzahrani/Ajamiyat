@@ -6,9 +6,9 @@ export interface Entry {
   original: string | null;
   submitted_at: string | null;
   approved_at: string | null;
-  categories: string[] | null;
-  examples: string[] | null;
+  categories: string[];
+  examples: string[];
   forms: string[];
-  meanings: string[] | null;
-  sources: string[] | null;
+  meanings: string[];
+  sources: string[];
 }
