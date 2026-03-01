@@ -6,8 +6,6 @@ const credentials = {
 
 function checkAdmin(req, res, next) {
   const token = req.headers.authorization;
-
-  console.log(token)
   if (!token) {
         res.set('WWW-Authenticate', 'Basic realm="Protected Area"');
         return res.status(401).json({error: 'Missing Authorization header'});
