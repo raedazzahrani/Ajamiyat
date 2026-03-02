@@ -30,9 +30,9 @@
 fieldset {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin: 36px 0;
-  margin-bottom: 18px;
+  gap: 1.5rem;
+  margin: 40px 0;
+  margin-bottom: 40px;
   border: none;
 }
 
@@ -54,8 +54,13 @@ legend::before {
 }
 
 label {
-  font-weight: 500;
+  position: absolute;
+  font-size: 16px;
+  top: -13px;
+  right: 12px;
+  font-weight: 400;
   color: #37474f;
+  background-color: white;
 }
 
 .form-group:has(.ng-invalid.ng-touched) label {
@@ -65,18 +70,20 @@ label {
 
 .form-group:has(:required) label::after {
   content: " (مطلوب)";
+  font-weight: 500;
   font-size: 12px;
+  color: #c62828;
 }
 
 
 
 /* INPUTS */
 .form-group {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   --input-color: #cfd8dc;
-
 }
 
 .form-group:focus-within {
@@ -96,13 +103,16 @@ select {
   font-size: 16px;
   border: 1px solid;
   border-color: var(--input-color);
-  box-shadow: var(--box-shadow);
+  /* box-shadow: var(--box-shadow); */
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   box-sizing: border-box;
   border-radius: 12px;
 }
 
+.form-group input, .form-group select {
+  width: 100%;
+}
 
 .deleteable-input-group {
   display: flex;
@@ -121,7 +131,7 @@ select {
   border: 1px solid var(--input-color);
   border-right: none;
   border-radius: 12px 0 0 12px;
-  box-shadow: var(--box-shadow);
+  /* box-shadow: var(--box-shadow); */
   background-color: #ffebee;
   color: #c62828;
   font-size: 18px;
@@ -143,8 +153,8 @@ select {
   align-self: flex-start;
   font-size: 13px;
   padding: 4px 14px;
-  background-color: #e3f2fd;
-  color: #1565c0;
+  background-color: #eef2ff;
+  color: #3730a3;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
@@ -152,12 +162,13 @@ select {
 }
 
 .add-btn:hover {
-  background-color: #bbdefb;
+  background-color: #e0e7ff;
   transform: translateY(-1px);
 }
 
 .submit-btn {
-  margin-top: 48px;
+  width: 100%;
+  margin-top: 30px;
   min-width: 140px;
   height: 42px;
   font-weight: 600;
