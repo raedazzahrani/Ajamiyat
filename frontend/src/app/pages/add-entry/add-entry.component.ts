@@ -115,6 +115,7 @@ export class AddEntryComponent implements OnInit {
 
   addForm(): void {
     this.formsArray.push(this.createStringControl());
+    console.log(this.form.value);
   }
 
   removeForm(index: number): void {
@@ -139,6 +140,7 @@ export class AddEntryComponent implements OnInit {
 
   addMeaning(value = ''): void {
     this.meaningsArray.push(this.createStringControl(value));
+    console.log(this.form.value);
   }
 
   removeMeaning(index: number): void {
