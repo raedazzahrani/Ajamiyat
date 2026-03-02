@@ -4,10 +4,18 @@
 </div>
 <div class="entries-page">
 
-  <!-- Left empty column -->
-  <div class="left-panel"></div>
+  <three-panel-layout>
 
-  <!-- Main entries list -->
+      <!-- Left empty column -->
+  <aside right-panel class="contribute-panel">
+    <div class="contribute-section filters-panel">
+      <p><mark><strong>المساهمة في المسرد متاحة للجميع</strong></mark></p>
+      <button class="contribute-btn" routerLink="/add-entry">+ ارصد كلمة</button>
+    </div>
+  </aside>
+
+
+      <!-- Main entries list -->
   <section class="entries-list">
     <a 
       *ngFor="let entry of filteredEntries"
@@ -40,8 +48,9 @@
     </a>
   </section>
 
-  <!-- Sidebar Filters -->
-  <aside class="sidebar">
+
+  <!-- filters-panel Filters -->
+  <aside class="filters-panel">
     
     <div class="filter-section">
       <h3>تصفية بالفئة</h3>
@@ -63,7 +72,7 @@
       </div>
     </div>
 
-    <div class="filter-section">
+    <div left-panel class="filter-section">
       <h3>تصفية بالمرجع</h3>
       <div class="filter-list">
         <label *ngFor="let src of sources" class="filter-item">
@@ -76,5 +85,11 @@
     <button class="clear-btn" (click)="clearFilters()">مسح التصفيات</button>
 
   </aside>
+
+
+
+  </three-panel-layout>
+
+  
 
 </div>
