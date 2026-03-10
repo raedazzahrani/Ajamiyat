@@ -1,10 +1,9 @@
 :host {
   display: block;
-  direction: rtl;
   padding: 2rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #f8f9fb;
-  min-height: 100vh;
+  background-color: var(--card-background);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-border-radius);
 }
 
 .entry-container {
@@ -64,17 +63,6 @@ li {
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
   font-size: 0.8rem;
-}
-
-.back-btn {
-  display: inline-block;
-  margin-top: 2rem;
-  text-decoration: none;
-  background: #111827;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  transition: 0.2s ease;
 }
 
 .back-btn:hover {

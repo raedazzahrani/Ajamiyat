@@ -25,6 +25,8 @@ export class EntriesComponent {
   
   FLAGS = FLAGS; // make available in template
 
+  mobileView = false;
+
   constructor(private entryService: EntryService) {
     this.loadEntries();
   }
@@ -90,5 +92,9 @@ export class EntriesComponent {
 
   getOtherForms(entry: Entry){
     return entry.forms.filter(e => e!= entry.entry_id);
+  }
+
+  openFilters() {
+    this.mobileView = !this.mobileView;
   }
 }

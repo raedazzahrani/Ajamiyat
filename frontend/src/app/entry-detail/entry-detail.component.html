@@ -1,4 +1,4 @@
-<div *ngIf="entry$ | async as entry" class="entry-container">
+<ng-container *ngIf="entry$ | async as entry">
 
   <div class="entry-title">{{ entry.entry_id }}</div>
 
@@ -51,7 +51,4 @@
       </li>
     </ul>
   </div>
-
-  <a routerLink="/" class="back-btn">رجوع</a>
-
-</div>
+</ng-container>

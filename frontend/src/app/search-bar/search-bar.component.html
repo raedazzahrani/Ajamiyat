@@ -1,8 +1,4 @@
-
-<input 
-type="text" 
-placeholder="ابحث عن كلمة..."
-[(ngModel)]="searchTerm"
-(keyup.enter)="onSearch()"
-/>
-<button (click)="onSearch()">بحث</button>
+<form>
+    <input type="text" placeholder="ابحث عن كلمة..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" />
+    <button (click)="onSearch()">بحث</button>
+</form>

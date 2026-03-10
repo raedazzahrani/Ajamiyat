@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDividerModule} from '@angular/material/divider';
-import { ThreePanelLayoutComponent } from './layouts/three-panel-layout/three-panel-layout.component';
+import { ContributeCardComponent } from './contribute-card/contribute-card.component';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { ThreePanelLayoutComponent } from './layouts/three-panel-layout/three-pa
     EntryDetailComponent,
     SearchBarComponent,
     AddEntryComponent,
-    ThreePanelLayoutComponent
+    ContributeCardComponent
   ],
   imports: [
     BrowserModule,

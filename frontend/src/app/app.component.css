@@ -3,23 +3,30 @@
   direction: rtl;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #f8f9fb;
+
+  --card-background: white;
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --card-border-radius: 12px;
+  --card-shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.08);
+  --hover-y-translate: -2px;
+  --hover-transition: all 0.2s ease;
 }
 
 /* Header */
 .app-header {
   display: flex;
   justify-content: space-between;
-  position: sticky;
+  /* position: sticky; */
   top: 0;
-  z-index: 1000;
+  /* z-index: 1000; */
   background: #111827;
   color: white;
   padding: 1rem 2rem;
 }
 
-.app-footer{
+.app-footer {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   z-index: 1000;
   background: #111827;
   color: white;
@@ -27,15 +34,16 @@
   font-size: 0.8rem;
 }
 
-.app-footer p{
+.app-footer p {
   margin: 0 0;
 }
 
-.app-header .logo{
+.app-header .logo {
   display: flex;
   align-items: center;
   gap: 0.3rem;
 }
+
 /* Logo */
 .app-header .logo a.title {
   font-size: 1.4rem;
@@ -52,7 +60,7 @@
   margin-bottom: 0;
 }
 
-.app-footer a.nav-link  {
+.app-footer a.nav-link {
   color: #d1d5db;
   text-decoration: none;
   transition: 0.2s ease;
@@ -68,6 +76,10 @@
   padding-bottom: 4px;
 }
 
+.main-content {
+  margin: 2rem;
+}
+
 
 /* Mobile */
 @media (max-width: 600px) {
@@ -75,6 +87,12 @@
   .app-header {
     gap: 0rem;
     flex-direction: column;
-    align-items: flex-start; /* moves items to the right */
+    align-items: flex-start;
   }
 }
+
+/* @media (max-width: 480px) {
+  .main-content {
+    margin: 2rem;
+  }
+} */

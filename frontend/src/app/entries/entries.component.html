@@ -1,46 +1,38 @@
-<div class="entries-header">
-  <p class="flex-message">{{entries.length}} مفردة / من {{languages.length}} لغة</p>
-  <search-bar></search-bar>
-</div>
-<div class="entries-page">
+<!-- Left empty column -->
+<aside class="right-panel">
+  <app-contribute-card></app-contribute-card>
+</aside>
 
-  <three-panel-layout>
+<main>
+  <!-- Main entries list -->
+  <div class="entries-header">
+    <p class="flex-message">{{entries.length}} مفردة / من {{languages.length}} لغة</p>
+    <search-bar></search-bar>
+    <button class="mobile-filters" (click)="openFilters()">{{mobileView ? 'إخفاء التصفيات' : 'التصفيات'}}</button>
+    <ng-container *ngIf="mobileView" [ngTemplateOutlet]="filtersPanel" [ngTemplateOutletContext]="{ extraClass: 'mobile-filters' }"></ng-container>
+  </div>
 
-      <!-- Left empty column -->
-  <aside right-panel class="contribute-panel">
-    <div class="contribute-section filters-panel">
-      <p><mark><strong>المساهمة في المسرد متاحة للجميع</strong></mark></p>
-      <button class="contribute-btn" routerLink="/add-entry">+ ارصد كلمة</button>
-    </div>
-  </aside>
-
-
-      <!-- Main entries list -->
   <section class="entries-list">
-    <a 
-      *ngFor="let entry of filteredEntries"
-      [routerLink]="['/entries', entry.entry_id]"
-      class="entry-card"
-    >
+    <a *ngFor="let entry of filteredEntries" [routerLink]="['/entries', entry.entry_id]" class="entry-card">
       <div class="core-info">
         <h3 class="entry-name">{{ entry.entry_id }}</h3>
-        <p class="badge" *ngFor="let cat of entry.categories">{{ cat }}</p>
+        <div class="badges">
+          <p class="badge" *ngFor="let cat of entry.categories">{{ cat }}</p>
+        </div>
       </div>
       <div class="secondary-info">
-        <p class="forms"
-          *ngIf="getOtherForms(entry) as otherForms"
-        >
+        <p class="forms" *ngIf="getOtherForms(entry) as otherForms">
           <ng-container *ngIf="otherForms.length > 0">
             وكذا: {{ otherForms.join(' و') }}
           </ng-container>
         </p>
-        <p class="origin"> 
+        <p class="origin">
           من اللغة: {{ entry.origin }}
           <span class="flag">{{ FLAGS[entry.origin] || '🏳️' }}</span>
         </p>
         <p class="meanings" *ngIf="entry.meanings.length > 0 && entry.examples.length === 0">
           يراد بها: {{ entry.meanings.join(' و') }}
-        </p> 
+        </p>
         <p class="examples" *ngIf="entry.examples.length > 0">
           مثال: {{ entry.examples[0] }}
         </p>
@@ -49,47 +41,46 @@
   </section>
 
 
-  <!-- filters-panel Filters -->
-  <aside class="filters-panel">
-    
-    <div class="filter-section">
-      <h3>تصفية بالفئة</h3>
-      <div class="filter-list">
-        <label *ngFor="let cat of categories" class="filter-item">
-          <input type="checkbox" [checked]="selectedCategories.has(cat)" (change)="toggleCategory(cat)">
-          {{ cat }}
-        </label>
+</main>
+
+<aside class="left-panel">
+  <ng-template #filtersPanel let-extraClass="extraClass">
+    <!-- filters-panel Filters -->
+    <div [class]="extraClass" class="filters-panel">
+
+      <div class="filter-section">
+        <h3>تصفية بالفئة</h3>
+        <div class="filter-list">
+          <label *ngFor="let cat of categories" class="filter-item">
+            <input type="checkbox" [checked]="selectedCategories.has(cat)" (change)="toggleCategory(cat)">
+            {{ cat }}
+          </label>
+        </div>
       </div>
-    </div>
 
-    <div class="filter-section">
-      <h3>تصفية باللغة</h3>
-      <div class="filter-list">
-        <label *ngFor="let lang of languages" class="filter-item">
-          <input type="checkbox" [checked]="selectedLanguages.has(lang)" (change)="toggleLanguage(lang)">
-          {{ lang }}
-        </label>
+      <div class="filter-section">
+        <h3>تصفية باللغة</h3>
+        <div class="filter-list">
+          <label *ngFor="let lang of languages" class="filter-item">
+            <input type="checkbox" [checked]="selectedLanguages.has(lang)" (change)="toggleLanguage(lang)">
+            {{ lang }}
+          </label>
+        </div>
       </div>
-    </div>
 
-    <div left-panel class="filter-section">
-      <h3>تصفية بالمرجع</h3>
-      <div class="filter-list">
-        <label *ngFor="let src of sources" class="filter-item">
-          <input type="checkbox" [checked]="selectedSources.has(src)" (change)="toggleSource(src)">
-          {{ src }}
-        </label>
+      <div class="filter-section">
+        <h3>تصفية بالمرجع</h3>
+        <div class="filter-list">
+          <label *ngFor="let src of sources" class="filter-item">
+            <input type="checkbox" [checked]="selectedSources.has(src)" (change)="toggleSource(src)">
+            {{ src }}
+          </label>
+        </div>
       </div>
+
+      <button class="clear-btn" (click)="clearFilters()">مسح التصفيات</button>
+
     </div>
-
-    <button class="clear-btn" (click)="clearFilters()">مسح التصفيات</button>
-
-  </aside>
-
-
-
-  </three-panel-layout>
-
-  
-
-</div>
+  </ng-template>
+  <ng-container [ngTemplateOutlet]="filtersPanel" [ngTemplateOutletContext]="{ extraClass: 'desktop-filters' }"></ng-container>
+</aside>

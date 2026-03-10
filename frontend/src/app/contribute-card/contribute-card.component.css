@@ -1,0 +1,23 @@
+:host{
+  display: block;
+  padding: 1rem 2rem;
+}
+
+button {
+  padding: 0.5rem 1rem; 
+  border-radius: 100px;
+  border: none;
+  background: #6366f1;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+p {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+button:hover {
+  background: #4f46e5;
+}

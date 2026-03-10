@@ -1,12 +1,8 @@
 /* GENERAL */
 
-
-.page-container {
+:host {
   display: flex;
   justify-content: center;
-  padding: 48px 16px;
-  background: #f5f7fa;
-  min-height: 100vh;
 }
 
 .form-card {

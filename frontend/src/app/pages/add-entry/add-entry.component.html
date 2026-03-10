@@ -1,98 +1,92 @@
-<div class="page-container">
-  <div class="form-card">
+<div class="form-card">
 
-    <h2 class="title">رصد الألفاظ</h2>
+  <h2 class="title">رصد الألفاظ</h2>
 
-    <form [formGroup]="form" (ngSubmit)="submit()" class="">
+  <form [formGroup]="form" (ngSubmit)="submit()" class="">
 
-      <!-- Word and its forms -->
-      <fieldset class="">
-        <legend>الكلمة وصيغها</legend>
-        <div class="form-group ">
-          <label for="entry_id">الكلمة مكتوبة بالعربية</label>
-          <input required id="entry_id" type="text" formControlName="entry_id"
-            placeholder="مثال: {{exampleEntry.entry_id}}" />
+    <!-- Word and its forms -->
+    <fieldset class="">
+      <legend>الكلمة وصيغها</legend>
+      <div class="form-group ">
+        <label for="entry_id">الكلمة مكتوبة بالعربية</label>
+        <input required id="entry_id" type="text" formControlName="entry_id"
+          placeholder="مثال: {{exampleEntry.entry_id}}" />
+      </div>
+      <div *ngFor="let ctrl of formsArray.controls; let i = index" formArrayName="forms" class="form-group ">
+        <label for="form-{{i}}">صيغة أخرى ({{i + 1}})</label>
+        <div class=" deleteable-input-group">
+          <input id="form-{{i}}" type="text" [formControlName]="i"
+            placeholder="{{exampleEntry.forms[i]? 'مثال: ' + exampleEntry.forms[i] : ''}}" />
+          <button type="button" class="delete-btn" (click)="removeForm(i)">🗑️</button>
         </div>
-        <div *ngFor="let ctrl of formsArray.controls; let i = index" formArrayName="forms"
-          class="form-group ">
-          <label for="form-{{i}}">صيغة أخرى ({{i + 1}})</label>
-          <div class=" deleteable-input-group">
-            <input id="form-{{i}}" type="text" [formControlName]="i"
-              placeholder="{{exampleEntry.forms[i]? 'مثال: ' + exampleEntry.forms[i] : ''}}" />
-            <button type="button" class="delete-btn" (click)="removeForm(i)">🗑️</button>
-          </div>
-        </div>
-        <button type="button" class="add-btn" (click)="addForm()">➕ زيادة الصيغ</button>
-      </fieldset>
+      </div>
+      <button type="button" class="add-btn" (click)="addForm()">➕ زيادة الصيغ</button>
+    </fieldset>
 
-      <!-- Word origin -->
-      <fieldset class="">
-        <legend>أصل الكلمة</legend>
-        <div class="form-group ">
-          <label>اللغة التي دخلت منها الكلمة</label>
-          <select required formControlName="originSelect">
-            <option value="" disabled>اختر اللغة</option>
-            <option *ngFor="let language of originOptions" [value]="language">
-              {{ language }}
-            </option>
-          </select>
-          <input required *ngIf="showOtherOriginInputField" formControlName="origin" id="origin" type="text"
-            placeholder="مثال: {{exampleEntry.origin}}" />
-        </div>
-        <div class="form-group ">
-          <label for="original">الكلمة في لغتها <small>(إن عُرفت)</small></label>
-          <input id="original" type="text" formControlName="original" placeholder="مثال: {{exampleEntry.original}}" />
-        </div>
-      </fieldset>
+    <!-- Word origin -->
+    <fieldset class="">
+      <legend>أصل الكلمة</legend>
+      <div class="form-group ">
+        <label>اللغة التي دخلت منها الكلمة</label>
+        <select required formControlName="originSelect">
+          <option value="" disabled>اختر اللغة</option>
+          <option *ngFor="let language of originOptions" [value]="language">
+            {{ language }}
+          </option>
+        </select>
+        <input required *ngIf="showOtherOriginInputField" formControlName="origin" id="origin" type="text"
+          placeholder="مثال: {{exampleEntry.origin}}" />
+      </div>
+      <div class="form-group ">
+        <label for="original">الكلمة في لغتها <small>(إن عُرفت)</small></label>
+        <input id="original" type="text" formControlName="original" placeholder="مثال: {{exampleEntry.original}}" />
+      </div>
+    </fieldset>
 
-      <!-- Meanings -->
-      <fieldset class="">
-        <legend>المعاني المقابلة للكلمة في العربية <small>(إن وُجدت)</small></legend>
-        <div *ngFor="let ctrl of meaningsArray.controls; let i = index" formArrayName="meanings"
-          class="form-group ">
-          <label for="meaning-{{i}}">معنى ({{i + 1}})</label>
-          <div class=" deleteable-input-group">
-            <input id="meaning-{{i}}" type="text" [formControlName]="i"
-              placeholder="{{exampleEntry.meanings[i]? 'مثال: ' + exampleEntry.meanings[i] : ''}}" />
-            <button type="button" class="delete-btn" (click)="removeMeaning(i)">🗑️</button>
-          </div>
+    <!-- Meanings -->
+    <fieldset class="">
+      <legend>المعاني المقابلة للكلمة في العربية <small>(إن وُجدت)</small></legend>
+      <div *ngFor="let ctrl of meaningsArray.controls; let i = index" formArrayName="meanings" class="form-group ">
+        <label for="meaning-{{i}}">معنى ({{i + 1}})</label>
+        <div class=" deleteable-input-group">
+          <input id="meaning-{{i}}" type="text" [formControlName]="i"
+            placeholder="{{exampleEntry.meanings[i]? 'مثال: ' + exampleEntry.meanings[i] : ''}}" />
+          <button type="button" class="delete-btn" (click)="removeMeaning(i)">🗑️</button>
         </div>
-        <button type="button" class="add-btn" (click)="addMeaning()">➕ زيادة المعاني</button>
-      </fieldset>
+      </div>
+      <button type="button" class="add-btn" (click)="addMeaning()">➕ زيادة المعاني</button>
+    </fieldset>
 
-      <!-- Examples -->
-      <fieldset class="">
-        <legend>أمثلة وسياقات وشواهد <small>(إن وُجدت)</small></legend>
-        <div *ngFor="let ctrl of examplesArray.controls; let i = index" formArrayName="examples"
-          class="form-group ">
-          <label for="example-{{i}}">سياق ({{i + 1}})</label>
-          <div class=" deleteable-input-group">
-            <input id="example-{{i}}" type="text" [formControlName]="i"
-              placeholder="{{exampleEntry.examples[i]? 'مثال: ' + exampleEntry.examples[i] : ''}}" />
-            <button type="button" class="delete-btn" (click)="removeExample(i)">🗑️</button>
-          </div>
+    <!-- Examples -->
+    <fieldset class="">
+      <legend>أمثلة وسياقات وشواهد <small>(إن وُجدت)</small></legend>
+      <div *ngFor="let ctrl of examplesArray.controls; let i = index" formArrayName="examples" class="form-group ">
+        <label for="example-{{i}}">سياق ({{i + 1}})</label>
+        <div class=" deleteable-input-group">
+          <input id="example-{{i}}" type="text" [formControlName]="i"
+            placeholder="{{exampleEntry.examples[i]? 'مثال: ' + exampleEntry.examples[i] : ''}}" />
+          <button type="button" class="delete-btn" (click)="removeExample(i)">🗑️</button>
         </div>
-        <button type="button" class="add-btn" (click)="addExample()">➕ زيادة السياقات</button>
-      </fieldset>
+      </div>
+      <button type="button" class="add-btn" (click)="addExample()">➕ زيادة السياقات</button>
+    </fieldset>
 
-      <!-- References -->
-      <fieldset class="">
-        <legend>الكتب والمراجع <small>(إن وُجدت)</small></legend>
-        <div *ngFor="let ctrl of referencesArray.controls; let i = index" formArrayName="references"
-          class="form-group ">
-          <label for="reference-{{i}}">مرجع ({{i + 1}})</label>
-          <div class=" deleteable-input-group">
-            <input id="reference-{{i}}" type="text" [formControlName]="i"
-              placeholder="{{exampleEntry.sources[i]? 'مثال: ' + exampleEntry.sources[i] : ''}}" />
-            <button type="button" class="delete-btn" (click)="removeReference(i)">🗑️</button>
-          </div>
+    <!-- References -->
+    <fieldset class="">
+      <legend>الكتب والمراجع <small>(إن وُجدت)</small></legend>
+      <div *ngFor="let ctrl of referencesArray.controls; let i = index" formArrayName="references" class="form-group ">
+        <label for="reference-{{i}}">مرجع ({{i + 1}})</label>
+        <div class=" deleteable-input-group">
+          <input id="reference-{{i}}" type="text" [formControlName]="i"
+            placeholder="{{exampleEntry.sources[i]? 'مثال: ' + exampleEntry.sources[i] : ''}}" />
+          <button type="button" class="delete-btn" (click)="removeReference(i)">🗑️</button>
         </div>
-        <button type="button" class="add-btn" (click)="addReference()">➕ زيادة المراجع</button>
-      </fieldset>
+      </div>
+      <button type="button" class="add-btn" (click)="addReference()">➕ زيادة المراجع</button>
+    </fieldset>
 
-      <!-- Submit -->
-      <button type="submit" class="submit-btn full-width" [disabled]="form.invalid">رصد اللفظة</button>
+    <!-- Submit -->
+    <button type="submit" class="submit-btn full-width" [disabled]="form.invalid">رصد اللفظة</button>
 
-    </form>
-  </div>
+  </form>
 </div>
