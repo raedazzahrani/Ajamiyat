@@ -11,11 +11,11 @@ async function approve(submissionId){
 }
 
 //returns a submission, or all submissions with filters applied
-async function fetch(submissionId){
+async function fetch(submissionId, searchTerm = null, offset = null, limit = null){
   try {
     const [result] = await pool.query(
-    "CALL fetch_aggregated(?, ?);",
-    [submissionId, null]
+    "CALL fetch_aggregated(?, ?, ?, ?, ?, ?);",
+    [submissionId, null, false, searchTerm, offset, limit]
     );
     const rows = result[0];
     return rows;

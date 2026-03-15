@@ -1,8 +1,7 @@
 const mysql = require("mysql2/promise");
-const api_db_version = "018.20260301141950"; // Update this version when making database schema changes
+const api_db_version = "021.20260311132211"; // Update this version when making database schema changes
 
-
-const pool = mysql.createPool({
+const connectionConfig = {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -11,21 +10,45 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   connectTimeout: 10000, // 10 seconds
-});
+};
 
-(async () => {
-  try {
-    const connection = await pool.getConnection();
-    console.log("Database connection established successfully.");
+class Pool {
+  constructor(config) {
+    this.pool = mysql.createPool(config);
+  }
+
+  async query(sql, params) {
+    const connection = await this.connect();
+    try {
+      await this.checkDatabaseVersion(connection);
+      const [rows] = await connection.query(sql, params);
+      return rows;
+    }
+    finally {
+      connection.release();
+    }
+  }
+
+  async connect() {
+    try {
+      const connection = await this.pool.getConnection();
+      console.log("Database connection established successfully.");
+      return connection;
+    }
+    catch (error) {
+      console.error("Failed to establish database connection:");
+      throw error; // Rethrow to prevent server from starting
+    }
+  }
+
+  async checkDatabaseVersion(connection) {
+    console.log("Checking database version...");
     const [[[result]]] = await connection.query("CALL get_db_version()");
-    if(result.version !== api_db_version) {
+    if (result.version !== api_db_version) {
       throw new Error(`Database version mismatch: expected ${api_db_version}, got ${result.version}`);
     }
     console.log(`Database version ${result.version} is compatible with API version ${api_db_version}.`);
-    connection.release();
-  } catch (error) {
-    throw error; // Rethrow to prevent the application from starting
   }
-})();
+}
 
-module.exports = { pool };
+module.exports = { pool: new Pool(connectionConfig) };

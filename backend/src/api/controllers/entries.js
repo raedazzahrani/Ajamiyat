@@ -6,6 +6,7 @@ const inputValidator = require("../../utils/validator")
 // ?offset=&limit=
 async function fetchAllFiltered(req, res){
 
+    const searchTerm = req.query.search;
 
     const parsedOffset = utils.parseStrictInt(req.query.offset);
     const parsedLimit = utils.parseStrictInt(req.query.limit);
@@ -22,7 +23,7 @@ async function fetchAllFiltered(req, res){
     if(!validOffset) return res.status(400).json({error: "Offset must be zero or a positive number"});
     if(!validLimit) return res.status(400).json({error: "Limit must be a positive number"});
     try{
-        const entries = await entriesRepo.fetchLatestApproved(null, parsedOffset?? 0, parsedLimit);
+        const entries = await entriesRepo.fetchAllLatestApproved({offset: parsedOffset, limit: parsedLimit, searchTerm});
         return res.status(200).json(entries);
     }
     catch (err){
@@ -33,16 +34,16 @@ async function fetchAllFiltered(req, res){
 
 
 // :entry_id 
-async function fetch(req, res){
+async function fetchEntry(req, res){
     const entry_id = req.params.entry_id;
     if (entry_id === null)
         return res.status(400).json({error: "Invalid entry identifier"});
     try{
-        const entry = await entriesRepo.fetchLatestApproved(entry_id, null, null);
-        if (entry.length === 0)
+        const entry = await entriesRepo.fetchLatestApproved(entry_id);
+        if (entry === null)
             return res.status(404).json({error: `Entry ${entry_id} does not exist`});
         //only fetch the top one (effectively the latest approved)
-        return res.status(200).json(entry[0]);
+        return res.status(200).json(entry);
     }
     catch (err){
         console.error(err);
@@ -77,4 +78,4 @@ async function updateID(req, res){
 
 
 
-module.exports = {fetchAllFiltered, fetch, updateID};
+module.exports = {fetchAllFiltered, fetch: fetchEntry, updateID};
